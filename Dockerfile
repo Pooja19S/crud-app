@@ -9,6 +9,7 @@ COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+RUN npm install -g nodemon
 
 # Copy the rest of the application code to the container
 COPY . .
@@ -17,4 +18,4 @@ COPY . .
 EXPOSE 2000
 
 # Start the application
-CMD [ "npm", "start" ]
+CMD [ "nodemon", "app.js" , "0.0.0.0:2000" ]
