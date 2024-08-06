@@ -57,8 +57,12 @@ pipeline:
                 spec:
                   artifacts:
                     primary:
-                      primaryArtifactRef: <+input>
-                      sources: <+input>
+                      primaryArtifactRef: crudapp
+                      sources:
+                        - identifier: crudapp
+                          type: DockerRegistry
+                          spec:
+                            tag: <+input>.allowedValues(latest)
           environment:
             environmentRef: ecscluster
             deployToAll: false
