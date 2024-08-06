@@ -2,7 +2,7 @@ const fs = require('fs');
 
 exports.addPlayerPage = (req, res) => {
     res.render('add-player.ejs', {
-        title: "Welcome to Socka | Add a player",
+        title: "Welcome to Socka | Add a new player",
         message: ''
     });
 };
