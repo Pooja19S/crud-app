@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Pooja19S_crud_app_1722963309377-push-trigger-input-set
+  identifier: Build_Pooja19S_crud_app_1722963309377pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: NodeJsApp
+  pipeline:
+    identifier: Build_Pooja19S_crud_app_1722963309377
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
