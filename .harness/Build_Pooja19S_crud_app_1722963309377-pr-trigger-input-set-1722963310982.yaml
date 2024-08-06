@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Pooja19S_crud_app_1722963309377-pr-trigger-input-set
+  identifier: Build_Pooja19S_crud_app_1722963309377prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: NodeJsApp
+  pipeline:
+    identifier: Build_Pooja19S_crud_app_1722963309377
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
