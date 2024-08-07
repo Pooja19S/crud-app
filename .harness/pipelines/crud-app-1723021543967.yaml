@@ -42,3 +42,5 @@ pipeline:
             type: Cloud
             spec: {}
         type: CI
+        delegateSelectors:
+          - docker-delegate
