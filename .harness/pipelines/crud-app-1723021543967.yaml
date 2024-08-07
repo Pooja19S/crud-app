@@ -44,3 +44,51 @@ pipeline:
         type: CI
         delegateSelectors:
           - docker-delegate
+    - stage:
+        name: deploy-to-ecs
+        identifier: deploytoecs
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: ECS
+          service:
+            serviceRef: nodejsapp
+            serviceInputs:
+              serviceDefinition:
+                type: ECS
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: Prodenv
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: ecsnewinfra
+          execution:
+            steps:
+              - step:
+                  name: ECS Rolling Deploy
+                  identifier: ecsRollingDeploy
+                  type: EcsRollingDeploy
+                  timeout: 5m
+                  spec:
+                    sameAsAlreadyRunningInstances: false
+                    forceNewDeployment: false
+            rollbackSteps:
+              - step:
+                  name: ECS Rolling Rollback
+                  identifier: ecsRollingRollback
+                  type: EcsRollingRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+        delegateSelectors:
+          - docker-delegate
