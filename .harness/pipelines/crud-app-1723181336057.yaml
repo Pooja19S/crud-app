@@ -42,3 +42,49 @@ pipeline:
             type: Cloud
             spec: {}
         type: CI
+    - stage:
+        name: deploy-to-ecs
+        identifier: deploytoecs
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: ECS
+          service:
+            serviceRef: nodejs
+            serviceInputs:
+              serviceDefinition:
+                type: ECS
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: Prodenv
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: ecsinfranew
+          execution:
+            steps:
+              - step:
+                  name: ECS Rolling Deploy
+                  identifier: ecsRollingDeploy
+                  type: EcsRollingDeploy
+                  timeout: 10m
+                  spec: {}
+            rollbackSteps:
+              - step:
+                  name: ECS Rolling Rollback
+                  identifier: ecsRollingRollback
+                  type: EcsRollingRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+        delegateSelectors:
+          - docker-delegate
