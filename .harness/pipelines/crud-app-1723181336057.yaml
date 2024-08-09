@@ -26,6 +26,15 @@ pipeline:
                     command: npm install
                   timeout: ""
                   type: Run
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: account.DockerNew
+                    repo: poojasomatkar1993/crud-app
+                    tags:
+                      - latest
           platform:
             os: Linux
             arch: Amd64
