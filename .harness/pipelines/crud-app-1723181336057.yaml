@@ -70,8 +70,10 @@ pipeline:
                   name: ECS Rolling Deploy
                   identifier: ecsRollingDeploy
                   type: EcsRollingDeploy
-                  timeout: 10m
-                  spec: {}
+                  timeout: 5m
+                  spec:
+                    sameAsAlreadyRunningInstances: false
+                    forceNewDeployment: false
             rollbackSteps:
               - step:
                   name: ECS Rolling Rollback
