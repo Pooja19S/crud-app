@@ -63,7 +63,7 @@ pipeline:
             environmentRef: Prodenv
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: ecsinfranew
+              - identifier: ecsinfra
           execution:
             steps:
               - step:
